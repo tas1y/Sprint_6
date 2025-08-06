@@ -5,6 +5,7 @@ from pages.base_page import BasePage as BP
 
 class OrderPage(BP):
 
+    @allure.step('Ввод имени: {name}')
     def enter_first_name(self, name):
         self.set_text_to_form(OPL.FIRST_NAME_INPUT, name)
 
@@ -12,22 +13,26 @@ class OrderPage(BP):
     def wait_for_first_name_field(self):
         self.wait_for_visible_element(OPL.FIRST_NAME_INPUT)
 
+    @allure.step('Ввод фамилии: {last_name}')
     def enter_last_name(self, last_name):
         self.set_text_to_form(OPL.LAST_NAME_INPUT, last_name)
 
+    @allure.step('Ввод адреса: {address}')
     def enter_address(self, address):
         self.set_text_to_form(OPL.ADDRESS_INPUT, address)
 
+    @allure.step('Выбор станции метро: {metro}')
     def select_metro_station(self, metro):
         self.click_on_element(OPL.METRO_FIELD)
         method, locator = OPL.METRO_OPTION
         locator = locator.format(metro)
         self.scroll_and_click_with_wait((method, locator))
 
+    @allure.step('Ввод номера телефона: {phone_number}')
     def enter_phone_number(self, phone_number):
         self.set_text_to_form(OPL.PHONE_INPUT, phone_number)
 
-    @allure.step('Заполняем форму данными пользователя')
+    @allure.step('Заполнение формы персональными данными')
     def fill_user_data_form(self, name, last_name, address, metro, phone_number):
         self.enter_first_name(name)
         self.enter_last_name(last_name)
